@@ -5,7 +5,7 @@
 
     <head>
         <meta charset="UTF-8">
-        <title>Kikoo</title>
+        <title>謎投稿サイト</title>
         <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/GrayGrids/LineIcons/LineIcons.css">
         <link rel="stylesheet" href="{% static 'css/stylesheets/screen.css' %}">
@@ -23,7 +23,7 @@
                 <div class="flex md:flex-no-wrap flex-wrap">
 
                     <!-- left colulmn start -->
-                    <div class="md:w-1/2 w-full bg-white">
+                    <div class="md:w-1/3 bg-white">
 
                         <div class="inner pr-12 px-4 py-1" id="leftNavbar">
 
@@ -47,7 +47,7 @@
 
                                     <!-- side navigation list item start -->
                                     <li class="side-navigation-list-item">
-                                        <a href="{% url 'tweet:index' %}" class="active clearfix w-auto p-2 px-4 mt-2 transition-3 inline-block rounded-full">
+                                        <a href="{% url 'post:index' %}" class="active clearfix w-auto p-2 px-4 mt-2 transition-3 inline-block rounded-full">
                                             <i class="icon float-left">
                                                 <svg viewbox="0 0 24 24">
                                                     <g>
@@ -179,7 +179,7 @@
                             <!-- side navigation end -->
 
                             <!-- right side tweet button start -->
-                            <a href="{% url 'tweet:post-create' %}">
+                            <a href="#">
                                 <div class="tweet-button my-4">
                                     <button class="p-3 twitter-bg text-white w-full rounded-full font-bold tracking-wide">Tweet</button>
                                 </div>
@@ -194,8 +194,8 @@
 
                     {% block content %}{% endblock content %}
 
-                    <!-- left colulmn start -->
-                    <div class="md:w-2/3 w-full px-4 py-0">
+                    <!-- right colulmn start -->
+                    <div class="md:w-1/3 w-full px-4 py-0">
 
                         <!-- inner start -->
                         <div class="inner right-column" id="rightSide">

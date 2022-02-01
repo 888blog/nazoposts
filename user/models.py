@@ -12,11 +12,14 @@ class UserManager(BaseUserManager):
 
     def _create_user(self, username, password, **extra_fields):
         # email = self.normalize_email(email)
+        if not username:
+            raise ValueError('The given username must be set')
         username = self.model.normalize_username(username)
         user = self.model(username=username, **extra_fields)
         user.set_password(password)
         user.save(using=self.db)
         return user
+
     def create_user(self, username, password=None, **extra_fields):
         extra_fields.setdefault('is_staff', False)
         extra_fields.setdefault('is_superuser', False)
@@ -50,9 +53,11 @@ class User(AbstractBaseUser, PermissionsMixin):
         verbose_name = _("user")
         verbose_name_plural = _("users")
 
-    def clean(self):
-        super().clean()
-        self.email = self.__class__.objects.normalize_email(self.email)
+    def get_full_name(self):
+        return self.username
+
+    def get_short_name(self):
+        return self.username
 
     def email_user(self, subject, message, from_email=None, **kwargs):
         send_mail(subject, message, from_email, [self.email], **kwargs)
