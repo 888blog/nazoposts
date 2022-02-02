@@ -9,7 +9,7 @@
     <meta name="author" content="" />
     <title>謎投稿サイト</title>
     <!-- Favicon-->
-    <link rel="icon" type="image/x-icon" href="assets/favicon.ico" />
+    <link rel="icon" type="image/x-icon" href="{% static 'assets/favicon.ico' %}" />
     <!-- Core theme CSS (includes Bootstrap)-->
     <link href="{% static 'css/styles.css' %}" rel="stylesheet" />
 </head>
@@ -40,7 +40,12 @@
             <!-- Top navigation-->
             <nav class="navbar navbar-expand-lg navbar-light bg-light border-bottom">
                 <div class="container-fluid">
+                    {% if user.is_anonymous %}
+                    <div class="mx-3">謎投稿サイトへようこそ</div>
+                    <div><a href="{% url 'user:signup' %}">会員登録はこちらから</a></div>
+                    {% else %}
                     <div class="ms-3">{{ user }}さんようこそ</div>
+                    {% endif %}
                     <!-- <button class="btn btn-primary" id="sidebarToggle">Toggle Menu</button> -->
                     <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                         data-bs-target="#navbarSupportedContent"
@@ -49,10 +54,17 @@
                             class="navbar-toggler-icon"></span></button>
                     <div class="collapse navbar-collapse" id="navbarSupportedContent">
                         <ul class="navbar-nav ms-auto mt-2 mt-lg-0">
-                            <li class="nav-item active"><a class="nav-link"
-                                    href="{% url 'post:index' %}">Home</a></li>
-                            <li class="nav-item"><a class="nav-link"
-                                    href="{% url 'user:login' %}">Login</a></li>
+                            <li class="nav-item active">
+                                <a class="nav-link" href="{% url 'post:index' %}">ホーム</a>
+                            </li>
+                            <li class="nav-item">
+                                {% if user.is_anonymous %}
+                                <a class="nav-link" href="{% url 'user:login' %}">ログイン</a>
+                                {% else %}
+                                <a class="nav-link" href="{% url 'user:logout' %}">ログアウト</a>
+                                {% endif %}
+
+                            </li>
                             <!-- <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" id="navbarDropdown" href="#"
                                     role="button" data-bs-toggle="dropdown" aria-haspopup="true"

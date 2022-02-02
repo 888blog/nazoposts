@@ -25,7 +25,10 @@ SECRET_KEY = 'qivf(3%^9g6d!@uhd(g@dcmoxmlosqx%&r&rxew5ua(s^9_yvx'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = [
+    '888blog.pythonanywhere.com',
+    '127.0.0.1',
+]
 
 
 # Application definition
@@ -92,6 +95,9 @@ AUTH_PASSWORD_VALIDATORS = [
     },
     {
         'NAME': 'django.contrib.auth.password_validation.MinimumLengthValidator',
+        'OPTIONS':{
+            'min_length': 8,
+        }
     },
     {
         'NAME': 'django.contrib.auth.password_validation.CommonPasswordValidator',
@@ -123,3 +129,5 @@ STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
 AUTH_USER_MODEL = 'user.User'
+
+LOGIN_URL = '/'

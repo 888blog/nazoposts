@@ -1,38 +1,27 @@
 from django import forms
 from django.core.exceptions import ValidationError
-
 from django.contrib.auth import authenticate
+from django.contrib.auth.forms import UserCreationForm, AuthenticationForm
+from user.models import User
 
-class LoginForm(forms.Form):
-    username = forms.CharField(required=True,
-                                max_length=30,
-                                widget=forms.TextInput(
-                                    attrs={
-                                        'placeholder': 'ユーザー名'
-                                    }
-                                ),)
+class LoginForm(AuthenticationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password']
     
-    password = forms.CharField(required=True,
-                                max_length=255,
-                                widget=forms.PasswordInput(
-                                    attrs={
-                                        'placeholder': 'パスワード'
-                                    }
-                                ))
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            # htmlの表示を変更可能にする
+            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['placeholder'] = field.label
 
-
-    def clean(self):
-        cleaned_data = super(LoginForm, self).clean()
-        if 'username' and 'password' in cleaned_data:
-            auth_result = authenticate(username=cleaned_data['username'], password=cleaned_data['password'])
-            if not auth_result:
-                raise ValidationError('ユーザー名またはパスワードが違います')
-        return cleaned_data
-
-    def clean_username(self):
-        username = self.cleaned_data['username']
-        return username
-
-    def clean_password(self):
-        password = self.cleaned_data['password']
-        return password
+class SignUpForm(UserCreationForm):
+    class Meta:
+        model = User
+        fields = ['username', 'password1', 'password2']
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        for field in self.fields.values():
+            field.widget.attrs['class'] = 'form-control'
+            field.widget.attrs['placeholder'] = field.label
