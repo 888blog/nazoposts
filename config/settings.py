@@ -128,6 +128,10 @@ USE_TZ = True
 STATIC_URL = '/static/'
 STATICFILES_DIRS = [os.path.join(BASE_DIR, 'static')]
 
+# 管理画面がcss読み込まないため追加
+STATIC_ROOT='static'
+
 AUTH_USER_MODEL = 'user.User'
+
 
 LOGIN_URL = '/'
