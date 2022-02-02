@@ -1,0 +1,32 @@
+{% extends 'post/base.html' %}
+
+{% block content %}
+<div class="row">
+    <div class="col-md-offset-4">
+        <div class="box mx-auto my-5">
+            <h2>ログイン</h2>
+            <form method="post" action="{% url 'user:login' %}">
+                {% csrf_token %}
+                <div><span class="text-danger">{{ form.non_field_errors }}</span></div>
+                <div class="form-group">
+                    <label for="username">ユーザー名</label>
+                    <div>{{ form.username }}</div>
+                </div>
+
+                <div class="divider-form"></div>
+
+                <div class="form-group">
+                    <label for="password">パスワード</label>
+                    <div>{{ form.password }}</div>
+                </div>
+
+                <div class="divider-form"></div>
+                <div class="text-center">
+                    <button type="submit" class="btn-block btn btn-lg btn-primary">ログイン</button>
+                    <p><a href="#">アカウント登録</a></p>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+{% endblock %}
