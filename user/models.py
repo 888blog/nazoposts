@@ -5,13 +5,14 @@ from django.core.mail import send_mail
 from django.utils import timezone
 from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.utils.translation import gettext_lazy as _
+import uuid
+
 
 
 class UserManager(BaseUserManager):
     use_in_migrations = True
 
     def _create_user(self, username, password, **extra_fields):
-        # email = self.normalize_email(email)
         if not username:
             raise ValueError('The given username must be set')
         username = self.model.normalize_username(username)
@@ -38,6 +39,8 @@ class UserManager(BaseUserManager):
 class User(AbstractBaseUser, PermissionsMixin):
     username_validator = UnicodeUsernameValidator()
 
+
+    uuid = models.UUIDField(primary_key=True, default=uuid.uuid4, editable=False)
     username = models.CharField(_("username"), max_length=30, validators=[username_validator], unique=True)
     email = models.EmailField(_("email_address"), blank=True)
     is_staff = models.BooleanField(_("staff status"), default=False)

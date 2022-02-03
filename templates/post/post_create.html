@@ -1,0 +1,40 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block content %}
+    <div class="row">
+        <div class="col-md-offset-4">
+            <div class="box mx-auto my-5">
+                <h2>謎投稿</h2>
+                <form method="post">
+                    {% csrf_token %}
+                    <div>
+                        <span class="text-danger">{{ form.non_field_errors }}</span>
+                    </div>
+
+                    {% for field in form %}
+                    <div class="form-group">
+                    {{ field.label_tag }}
+                        <div>{{ field }}</div>
+                    </div>
+
+                    <div class="divider-form"></div>
+
+                    {% endfor %}
+
+                    {% if form.errors %}
+                        {% for field in form %}
+                            {% for error in field.errors %}
+                                <div class="text-danger">{{ error }}</div>
+                            {% endfor %}
+                        {% endfor %}
+                    {% endif %}
+
+                    <div class="text-center">
+                        <button type="submit" class="btn-block btn btn-lg btn-primary">投稿</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

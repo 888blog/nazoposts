@@ -113,7 +113,7 @@ strong {
 
 .form-control {
     background: none;
-    height: 40px;
+    /* height: 40px; */
     border: none;
     border-radius: 0px;
     box-shadow: none;
