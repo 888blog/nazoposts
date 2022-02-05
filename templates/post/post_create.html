@@ -6,7 +6,7 @@
         <div class="col-md-offset-4">
             <div class="box mx-auto my-5">
                 <h2>謎投稿</h2>
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     {% csrf_token %}
                     <div>
                         <span class="text-danger">{{ form.non_field_errors }}</span>

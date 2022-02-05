@@ -14,8 +14,6 @@ class PostForm(forms.ModelForm):
         label='解説',
     )
 
-
-
     class Meta:
         model = Post
         fields = ('title','question', 'q_img1', 'q_img2', 'q_img3', 'q_img4', 'answer', 'explanation', 'e_img1', 'e_img2', 'e_img3', 'e_img4')
