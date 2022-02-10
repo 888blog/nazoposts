@@ -3,7 +3,7 @@
 
 {% block content %}
     <div class="row">
-        <div class="col-md-offset-4">
+        <div class=" col-md-offset-4">
             <div class="box mx-auto my-5">
                 <h2>謎投稿</h2>
                 <form method="post" enctype="multipart/form-data">
@@ -15,6 +15,7 @@
                     {% for field in form %}
                     <div class="form-group">
                     {{ field.label_tag }}
+                    {% if field.field.required %}<span class="text-danger"> 必須</span>{% endif %}
                         <div>{{ field }}</div>
                     </div>
 

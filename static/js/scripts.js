@@ -24,3 +24,15 @@ window.addEventListener('DOMContentLoaded', event => {
     }
 
 });
+
+// 回答確認(post_question.html)
+
+let answerModal = document.getElementById('answerModal')
+answerModal.addEventListener('show.bs.modal', function (event) {
+    let answer = document.getElementById('answer').value;
+    let current = document.getElementById('current').innerHTML;
+    let url = document.getElementById('url').innerHTML;    
+    if (current == answer) {
+        window.location.href = url;
+    };
+});

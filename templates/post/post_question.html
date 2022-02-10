@@ -1,0 +1,151 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    <div class="container">
+        <div class="box mx-auto my-5 px-3">
+            <div class="row justify-content-between">
+                <h2 class="col-8 my-0">{{ post.title }}</h2>
+                <div class="d-flex align-items-end col-4 text-end">作者:{{ post.author }}</div>
+            </div>
+            <hr class="my-2">
+            <h3>〜問題〜</h3>
+            <p class="fs-3 text-dark border border-3 p-3">{{ post.question }}</p>
+
+            {% if img_count < 2 %}
+                <div class="row row-cols-1 g-2 ">
+                {% else %}
+                    <div class="row row-cols-1 row-cols-sm-2 g-2 ">
+                    {% endif %}
+                    {% if post.q_img1 %}
+                        <div class="col">
+                            <img src="{{ post.q_img1.url }}" class="card-img-top" alt="問題画像1">
+                        </div>
+                    {% endif %}
+                    {% if post.q_img2 %}
+                        <div class="col">
+                            <img src="{{ post.q_img2.url }}" class="card-img-top" alt="問題画像2">
+                        </div>
+                    {% endif %}
+                    {% if post.q_img3 %}
+                        <div class="col">
+                            <img src="{{ post.q_img3.url }}" class="card-img-top" alt="問題画像3">
+                        </div>
+                    {% endif %}
+                    {% if post.q_img4 %}
+                        <div class="col">
+                            <img src="{{ post.q_img4.url }}" class="card-img-top" alt="問題画像4">
+                        </div>
+                    {% endif %}
+
+                </div>
+                <div class="input-group mt-4">
+                    <span class="input-group-text" id="inputGroup-sizing-default">回答入力</span>
+                    <input
+                        type="text"
+                        id="answer"
+                        class="form-control"
+                        aria-label="Sizing example input"
+                        aria-describedby="inputGroup-sizing-default">
+                        <p>指定がなければ<br>ひらがな、カタカナ、半角英数字で入力してください</p>
+                </div>
+
+
+                <div class="text-center mb-4">
+                    <!-- Button trigger modal -->
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#answerModal">
+                        回答する
+                    </button>
+                    <div id="current" hidden>{{ post.answer }}</div>
+                    <div id="url" hidden>{% url 'post:post_answer' post.pk %}</div>
+
+                    <!-- Modal -->
+                    <div class="modal fade" id="answerModal" tabindex="-1" aria-labelledby="answerModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-dialog-centered">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="answerModalLabel">不正解</h5>
+                                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                </div>
+                                <div class="modal-body">
+                                    間違っています。<br>
+                                    入力方法に間違いがないかも確認してください。
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">閉じる</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {% if post.hint %}
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button
+                                        class="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne"
+                                        aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                        ヒントを見る
+                                    </button>
+                                </h2>
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse" aria-labelledby="panelsStayOpen-headingOne">
+                                    <div class="accordion-body text-start">
+                                        {{ post.hint }}
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="accordion" id="accordionPanelsStayOpenExample">
+                            <div class="accordion-item">
+                                <h2 class="accordion-header" id="panelsStayOpen-headingOne">
+                                    <button
+                                        class="accordion-button collapsed"
+                                        type="button"
+                                        data-bs-toggle="collapse"
+                                        data-bs-target="#panelsStayOpen-collapseOne"
+                                        aria-expanded="false"
+                                        aria-controls="panelsStayOpen-collapseOne">
+                                        ヒントはありません
+                                    </button>
+                                </h2>
+                            </div>
+                        </div>
+                    {% endif %}
+
+                    <div class="text-center my-4">
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#explanationModal">
+                            答えを見る
+                        </button>
+
+                        <!-- Modal -->
+                        <div class="modal fade" id="explanationModal" tabindex="-1" aria-labelledby="explanationModalLabel" aria-hidden="true">
+                            <div class="modal-dialog modal-dialog-centered">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <h5 class="modal-title" id="explanationModalLabel">確認</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                    </div>
+                                    <div class="modal-body">
+                                        本当に回答を見ますか
+                                    </div>
+                                    <div class="modal-footer">
+                                        <a href="{% url 'post:post_answer' post.pk %}">
+                                            <button type="button" class="btn btn-primary" data-bs-dismiss="modal">答えを見る</button>
+                                        </a>
+                                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">もう少し考える</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    {% endblock %}

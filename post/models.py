@@ -17,6 +17,7 @@ class Post(models.Model):
     e_img2 = models.ImageField(verbose_name='解説画像2', upload_to='documents/', blank=True, null=True)
     e_img3 = models.ImageField(verbose_name='解説画像3', upload_to='documents/', blank=True, null=True)
     e_img4 = models.ImageField(verbose_name='解説画像4', upload_to='documents/', blank=True, null=True)
+    hint = models.CharField(verbose_name='ヒント', max_length=100, blank=True, null=True)
     good = models.IntegerField(verbose_name='高評価', default=0)
     bad = models.IntegerField(verbose_name='低評価', default=0)
     author = models.ForeignKey(settings.AUTH_USER_MODEL, on_delete=models.CASCADE)

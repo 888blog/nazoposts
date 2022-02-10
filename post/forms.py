@@ -10,13 +10,19 @@ class PostForm(forms.ModelForm):
     )
     explanation = forms.CharField(
         required=True,
-        widget=forms.Textarea(attrs={'rows': 10, 'cols': 20}),
+        widget=forms.Textarea(),
         label='解説',
+    )
+
+    hint = forms.CharField(
+        required=True,
+        widget=forms.Textarea(),
+        label='ヒント',
     )
 
     class Meta:
         model = Post
-        fields = ('title','question', 'q_img1', 'q_img2', 'q_img3', 'q_img4', 'answer', 'explanation', 'e_img1', 'e_img2', 'e_img3', 'e_img4')
+        fields = ('title','question', 'q_img1', 'q_img2', 'q_img3', 'q_img4', 'answer', 'explanation', 'e_img1', 'e_img2', 'e_img3', 'e_img4', 'hint')
         widgets = {
             'description': forms.Textarea(attrs={'rows':80, 'cols':80}),
         }

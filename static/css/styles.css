@@ -72,9 +72,8 @@
   box-sizing: border-box;
 }
 
-/* logion form */
 .box {
-  max-width: 500px;
+  max-width: 1200px;
   padding: 25px 40px;
   background-color: #fff;
   box-shadow: 0 8px 17px 0 rgb(0 0 0 / 20%), 0 6px 20px 0 rgb(0 0 0 / 19%);
@@ -92,11 +91,24 @@
 }
 
 p {
+  margin-top: 0;
+  margin-bottom: 1rem;
   color: #aebbcb;
 }
 
 a {
-  color: #23a9f6;
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+a:hover {
+  color: #0a58ca;
+}
+
+a:not([href]):not([class]),
+a:not([href]):not([class]):hover {
+  color: inherit;
+  text-decoration: none;
 }
 
 .divider-form {
@@ -237,17 +249,10 @@ h6,
   font-size: 1rem;
 }
 
-p {
-  margin-top: 0;
-  margin-bottom: 1rem;
-}
-
 abbr[title],
 abbr[data-bs-original-title] {
   text-decoration: underline dotted;
-  text-decoration: underline dotted;
   cursor: help;
-  text-decoration-skip-ink: none;
   text-decoration-skip-ink: none;
 }
 
@@ -319,21 +324,6 @@ sub {
 
 sup {
   top: -0.5em;
-}
-
-a {
-  color: #0d6efd;
-  text-decoration: underline;
-}
-
-a:hover {
-  color: #0a58ca;
-}
-
-a:not([href]):not([class]),
-a:not([href]):not([class]):hover {
-  color: inherit;
-  text-decoration: none;
 }
 
 pre,

@@ -1,0 +1,59 @@
+{% extends 'post/base.html' %}
+{% load static %}
+
+{% block content %}
+
+    {% for item in object_list %}
+        {{ item }}
+    {% endfor %}
+
+    <div class="container">
+        <div class="row">
+            <div class=" col-md-offset-4">
+                <div class="box mx-auto my-5 px-3">
+                    <h2>{{ post.title }}</h2>
+                    <hr>
+                    <h3>〜答え〜</h3>
+                    <p class="fs-3 text-dark border border-3 p-3">{{ post.answer }}</p>
+                    <h4>〜解説〜</h4>
+                    <p class="fs-4 text-dark border border-3 p-3">{{ post.explanation }}</p>
+
+                    {% if img_count < 2 %}
+                        <div class="row row-cols-1 g-2 ">
+                        {% else %}
+                            <div class="row row-cols-1 row-cols-sm-2 g-2 ">
+                            {% endif %}
+                            {% if post.e_img1 %}
+                                <div class="col">
+                                    <img src="{{ post.e_img1.url }}" class="card-img-top" alt="回答画像1">
+                                </div>
+                            {% endif %}
+                            {% if post.e_img2 %}
+                                <div class="col">
+                                    <img src="{{ post.e_img2.url }}" class="card-img-top" alt="回答画像2">
+                                </div>
+                            {% endif %}
+                            {% if post.e_img3 %}
+                                <div class="col">
+                                    <img src="{{ post.e_img3.url }}" class="card-img-top" alt="回答画像3">
+                                </div>
+                            {% endif %}
+                            {% if post.e_img4 %}
+                                <div class="col">
+                                    <img src="{{ post.e_img4.url }}" class="card-img-top" alt="回答画像4">
+                                </div>
+                            {% endif %}
+
+                        </div>
+
+                        <div class="text-center my-4">
+                            <a href="{% url 'post:index' %}">
+                                <button class="btn-block btn btn-lg btn-primary">ホームに戻る</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    {% endblock %}

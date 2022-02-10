@@ -2,7 +2,31 @@
 {% load static %}
 
 {% block content %}
-
-Top Page
-
+    <div class="album py-5 bg-light">
+        <div class="container">
+            <h1>投稿謎一覧</h1>
+            <div class="row row-cols-1 row-cols-sm-2 row-cols-lg-3 g-3">
+                {% for post in post_list %}
+                    <div class="col">
+                        <a href="{% url 'post:post_question' post.pk %}" class="text-decoration-none">
+                            <div class="card shadow-sm h-100">
+                                {% if post.q_img1 %}
+                                    <img src="{{ post.q_img1.url }}" class="card-img-top" alt="問題画像">
+                                {% else %}
+                                    <img src="{% static 'img/noimg.jpg' %}" class="card-img-top" alt="画像ありません">
+                                {% endif %}
+                                <div class="card-body">
+                                    <p class="card-text fw-bold fs-3 text-black">{{ post.title }}</p>
+                                </div>
+                                <div class="card-footer">
+                                    <p class="text-muted card-text">{{ post.created_at }}</p>
+                                </div>
+                            </div>
+                        </a>
+                    </div>
+                {% endfor %}
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock content %}
